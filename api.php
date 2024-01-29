@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    if (count($results) === 1) {
+    if (count($results) === 1) { // if only one search of city exists do not return history
         return;
     } else {
         echo json_encode($results); 

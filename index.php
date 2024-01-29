@@ -16,12 +16,16 @@
         </form>
     </div>
 
+    <div>
+    <h2>Results</h2>
     <div id="results">
-        <h2>Results</h2>
+    </div>
     </div>
 
+    <div>
+    <h2>Results history</h2>
     <div id="results-history">
-        <h2>Results history</h2>
+    </div>
     </div>
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

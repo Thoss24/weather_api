@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const getWeather = () => {
+  
+  $('#get-weather').on('click', (e) => { // search city handler
+    e.preventDefault()
+    getWeather()
+  });
+  
+  const getWeather = () => { // GET data from feed
 
     const location = $("#location_val").val()
     const key = '4d3ec4866c4270e5095e1511ffb1bd78';
@@ -20,35 +26,51 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         addSearchToDb(search)
 
-        // look in database for existing weather searches for current location & display those searches in addition to most recent search
-        // put previous searches in a "History" section and most recent search above that section
       },
     });
   };
 
-  $('#get-weather').on('click', (e) => {
-    e.preventDefault()
-    getWeather()
-  });
-
-  const getPreviousSearches = (location) => {
+  const getPreviousSearches = (location) => { // retrieve previous searches of current search from db
     
-    const resultsHistory = $('#results-history')[0]
+    const resultsHistory = $('#results-history')[0];
+    
+    while(resultsHistory.lastElementChild) {
+      resultsHistory.removeChild(resultsHistory.lastElementChild)
+    }
 
     $.ajax({
         url: `http://localhost/weather_api/api.php?id=${location}`,
         method: 'GET',
-        dataType: 'text',
+        dataType: "json",
         success: (result) => {
-            console.log(result)
-            resultsHistory.append(result)
+
+          const resultsExcludingCurrentSearch = result.slice(0, result.length-1) // exclude most recent search
+
+          resultsExcludingCurrentSearch.map((search) => {
+            const shell = $(`<div class="history-item-shell">
+            <div>
+              <img src="https://openweathermap.org/img/wn/${search.icon}.png">
+             <p>${search.temp} &deg c</p>
+            </div>
+            <div>
+              <p>${search.description} in ${search.location}</p>
+              <p>Date: ${search.time}</p>
+            </div>
+            </div>`);
+  
+            resultsHistory.append(shell[0])
+          })
         }
     })
   };
 
-  const addSearchToDb = (search) => {
+  const addSearchToDb = (search) => { // add current search to db
 
-    const results = $('#results')[0]
+    const results = $('#results')[0];
+    
+    while(results.lastElementChild) {
+      results.removeChild(results.lastElementChild)
+    }
 
     $.ajax({
         url: `http://localhost/weather_api/api.php`,
@@ -56,8 +78,19 @@ document.addEventListener("DOMContentLoaded", () => {
         dataType: 'text',
         data: JSON.stringify(search),
         success: () => {
-            getPreviousSearches(search.location)
-            results.append(search)
+          getPreviousSearches(search.location)
+            //console.log(search)
+            const shell = $(`<div class="search-item-shell">
+            <div>
+              <img src="https://openweathermap.org/img/wn/${search.icon}.png">
+             <p>${search.temp} &deg c</p>
+            </div>
+            <div>
+              <p>${search.description} in ${search.location}</p>
+            </div>
+            </div>`);
+
+            results.append(shell[0])
         }
     })
   };
