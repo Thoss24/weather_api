@@ -1,7 +1,66 @@
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 #get-weather-form {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 4px;
+}
+
+.results-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#results {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+#results-history {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.search-item-shell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.history-item-shell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.search-item-shell:hover {
+    box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.2);
+}
+
+.history-item-shell:hover {
+    box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.2);
 }

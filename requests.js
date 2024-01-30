@@ -13,9 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
     $.ajax({
       method: "GET",
       url: `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric`,
+      error: (error) => {
+        const results = $('#results')[0];
+        if (error.status === 404) {
+          const cityNotFound = $(`<p>${error.status} Oops! No matching location found. Please try again!</p>`);
+          results.append(cityNotFound[0])
+        }
+        if (error.status === 401) {
+          const invalidKey = $(`<p>${error.status} Oops! Looks like you have an invalid api key! Make sure it's the correct key!</p>`)
+          results.append(invalidKey[0])
+        }
+      },
       success: (result) => {
-
-        // add handler if city not found - 404 & if api key is invalid - 401
 
         // add search results to database
         const search = { 
@@ -42,6 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
         url: `http://localhost/weather_api/api.php?id=${location}`,
         method: 'GET',
         dataType: "json",
+        error: (error) => {
+          console.log(error)
+        },
         success: (result) => {
 
           const resultsExcludingCurrentSearch = result.slice(0, result.length-1) // exclude most recent search
@@ -77,6 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
         method: 'POST',
         dataType: 'text',
         data: JSON.stringify(search),
+        error: (error) => {
+          console.log(error)
+        },
         success: () => {
           getPreviousSearches(search.location)
             //console.log(search)

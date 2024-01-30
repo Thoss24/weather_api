@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+
+    <main>
     <h1>Weather Api</h1>
     <div>
         <form action="" id="get-weather-form">
@@ -15,19 +17,19 @@
             <button type="submit" id="get-weather">Get Weather</button>
         </form>
     </div>
-
-    <div>
+    <div class="results-container">
     <h2>Results</h2>
     <div id="results">
     </div>
     </div>
 
-    <div>
-    <h2>Results history</h2>
+    <div class="results-container">
+    <h2>History</h2>
     <div id="results-history">
     </div>
     </div>
-   
+    </main>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./requests.js"></script>
 </body>
