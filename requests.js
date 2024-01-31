@@ -14,7 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
       method: "GET",
       url: `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric`,
       error: (error) => {
+
         const results = $('#results')[0];
+
+        // remove any existing error messages
+        while(results.lastElementChild) {
+          results.removeChild(results.lastElementChild)
+        }
+
         if (error.status === 404) {
           const cityNotFound = $(`<p>${error.status} Oops! No matching location found. Please try again!</p>`);
           results.append(cityNotFound[0])
@@ -34,6 +41,27 @@ document.addEventListener("DOMContentLoaded", () => {
             description: result.weather[0].description
         };
         addSearchToDb(search)
+
+        console.log(typeof result.weather[0].description)
+
+        if (result.weather[0].description.includes("rain")) {
+          $('#header').css("background-image", "url(" + "http://localhost/weather_api/images/rain.jpg" + ")")
+        }
+        if (result.weather[0].description.includes("clear")) {
+          $('#header').css("background-image", "url(" + "http://localhost/weather_api/images/clear_sky.jpg" + ")")
+        }
+        if (result.weather[0].description.includes("overcast")) {
+          $('#header').css("background-image", "url(" + "http://localhost/weather_api/images/overcast.jpg" + ")")
+        }
+        if (result.weather[0].description.includes("mist")) {
+          $('#header').css("background-image", "url(" + "http://localhost/weather_api/images/misty.jpg" + ")")
+        }
+        if (result.weather[0].description.includes("broken")) {
+          $('#header').css("background-image", "url(" + "http://localhost/weather_api/images/broken_clouds.jpg" + ")")
+        }
+        if (result.weather[0].description.includes("clouds") && !result.weather[0].description.includes("overcast")) {
+          $('#header').css("background-image", "url(" + "http://localhost/weather_api/images/clouds.jpg" + ")")
+        }
 
       },
     });

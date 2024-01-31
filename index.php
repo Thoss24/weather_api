@@ -9,13 +9,16 @@
 <body>
 
     <main>
+    <div id="header">
     <h1>Weather Api</h1>
+    
     <div>
         <form action="" id="get-weather-form">
             <label for="location_val">Enter your Location</label>
             <input type="text" id="location_val">
             <button type="submit" id="get-weather">Get Weather</button>
         </form>
+    </div>
     </div>
     <div class="results-container">
     <h2>Results</h2>
