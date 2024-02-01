@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html {
     height: 100%;
@@ -7,17 +10,17 @@ body {
     margin: 0;
 }
 
-main {
+/* main {
     display: flex;
-    /* justify-content: center; */
+    justify-content: center; 
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-}
+} */
 
-#header {
+/* #header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,4 +86,4 @@ main {
 
 .history-item-shell:hover {
     box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.2);
-}
+} */
